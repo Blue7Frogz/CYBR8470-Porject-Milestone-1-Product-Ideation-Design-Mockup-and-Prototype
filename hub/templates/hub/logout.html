@@ -1,0 +1,29 @@
+{% extends 'hub/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout - UNO Activity Hub</title>
+    <style>
+        form button {
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #ff3333;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Are you sure you want to logout?</h2>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
+{% endblock %}
+
+

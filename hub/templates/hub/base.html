@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UNO Activity Hub</title>
+    <style>
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 10px;
+        }
+        nav a, nav form {
+            margin-right: 10px;
+            display: inline-block;
+        }
+        nav button {
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>UNO Activity Hub</h1>
+        <nav>
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

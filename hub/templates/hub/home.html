@@ -1,0 +1,50 @@
+{% extends 'hub/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UNO Activity Hub - Home</title>
+    <style>
+        form input[type="text"] {
+            padding: 5px;
+            width: 300px;
+        }
+        form button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px 0;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h2>All Posts</h2>
+
+    {% if can_post %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="text" placeholder="Write something..." required>
+        <button type="submit">Post</button>
+    </form>
+    {% endif %}
+
+    <ul>
+        {% for post in posts %}
+            <li><strong>{{ post.user.username }}:</strong> {{ post.text }}</li>
+        {% empty %}
+            <li>No posts yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+{% endblock %}
+
+
